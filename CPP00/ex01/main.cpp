@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 15:29:39 by sakitaha          #+#    #+#             */
-/*   Updated: 2024/11/23 19:07:38 by sakitaha         ###   ########.fr       */
+/*   Created: 2024/11/21 16:47:00 by sakitaha          #+#    #+#             */
+/*   Updated: 2024/11/23 19:08:07 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
 
-static void print_to_upper(const char *str) {
-  if (!str) {
-    return;
-  }
-  for (int i = 0; str[i]; i++) {
-    std::cout << static_cast<char>(std::toupper(str[i]));
-  }
-}
-
 int main(int argc, const char **argv) {
-  if (argc == 1) {
-    std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-    return (0);
+  (void)argv;
+  if (argc != 1) {
+    std::cerr << "Error: too many arguments" << std::endl;
+    exit(EXIT_FAILURE);
   }
-  for (int i = 1; i < argc; i++) {
-    print_to_upper(argv[i]);
-  }
-  std::cout << std::endl;
-  return (0);
+  PhoneBook phoneBook;
+  phoneBook.startPhoneBook();
+  return EXIT_SUCCESS;
 }

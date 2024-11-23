@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Others
+megaphone
+phonebook
+.vscode
+*.pdf
