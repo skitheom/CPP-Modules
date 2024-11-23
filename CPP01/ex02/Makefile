@@ -6,15 +6,15 @@
 #    By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+           #
 #    Created: 2024/11/21 16:15:58 by sakitaha          #+#    #+#              #
-#    Updated: 2024/11/23 19:44:16 by sakitaha         ###   ########.fr        #
+#    Updated: 2024/11/23 19:43:06 by sakitaha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX      := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM       := rm -f
-TARGET   := zombie
-SRCS     := main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+TARGET   := brain
+SRCS     := main.cpp
 OBJS     := $(SRCS:.cpp=.o)
 
 all: $(TARGET)
