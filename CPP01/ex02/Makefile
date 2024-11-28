@@ -4,16 +4,16 @@
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+           #
-#    Created: 2024/11/21 16:15:58 by sakitaha          #+#    #+#              #
-#    Updated: 2024/11/23 19:43:06 by sakitaha         ###   ########.fr        #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/24 02:10:43 by sakitaha          #+#    #+#              #
+#    Updated: 2024/11/24 02:10:55 by sakitaha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CXX      := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 RM       := rm -f
-TARGET   := brain
+TARGET   := program
 SRCS     := main.cpp
 OBJS     := $(SRCS:.cpp=.o)
 
