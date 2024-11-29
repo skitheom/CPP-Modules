@@ -36,3 +36,4 @@ megaphone
 phonebook
 .vscode
 *.pdf
+.DS_*

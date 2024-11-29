@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 15:47:20 by sakitaha          #+#    #+#             */
-/*   Updated: 2024/11/29 16:07:54 by sakitaha         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:14:22 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@ const std::string Harl::levels[NUM_OF_FUNCS] = {
     "WARNING",
     "ERROR",
 };
+
+Harl::logLevel Harl::getLogLevel(const std::string &level) {
+  for (int i = 0; i < NUM_OF_FUNCS; ++i) {
+    if (levels[i] == level) {
+      return static_cast<Harl::logLevel>(i);
+    }
+  }
+  return Harl::INVALID;
+}
 
 void Harl::debug(void) { std::cout << "debug message" << std::endl; }
 
@@ -41,24 +50,28 @@ void Harl::complain(std::string level) {
   std::cout << "Invalid level: " << level << std::endl;
 }
 
-void Harl::complain_loop(int level_no) {
+void Harl::complain(Harl::logLevel level_code) {
   void (Harl::*func[NUM_OF_FUNCS])() = {&Harl::debug, &Harl::info,
                                         &Harl::warning, &Harl::error};
-  for (int i = level_no; i < NUM_OF_FUNCS; i++) {
-    std::cout << "[ " << levels[i] << " ]" << std::endl;
-    (this->*func[i])();
-    std::cout << std::endl;
-  }
+  std::cout << "[ " << levels[level_code] << " ]" << std::endl;
+  (this->*func[level_code])();
+  std::cout << std::endl;
 }
 
 void Harl::filter(std::string level) {
 
-  for (int i = 0; i < NUM_OF_FUNCS; i++) {
-    if (levels[i] == level) {
-      complain_loop(i);
-      return;
-    }
+  switch (getLogLevel(level)) {
+  case DEBUG:
+    complain(DEBUG);
+  case INFO:
+    complain(INFO);
+  case WARNING:
+    complain(WARNING);
+  case ERROR:
+    complain(ERROR);
+    break;
+  default:
+    std::cout << "[ Probably complaining about insignificant problems ]"
+              << std::endl;
   }
-  std::cout << "[ Probably complaining about insignificant problems ]"
-            << std::endl;
 }
