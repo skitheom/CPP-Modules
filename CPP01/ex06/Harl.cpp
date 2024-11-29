@@ -1,0 +1,64 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/29 15:47:20 by sakitaha          #+#    #+#             */
+/*   Updated: 2024/11/29 16:07:54 by sakitaha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Harl.hpp"
+#include <iostream>
+
+const std::string Harl::levels[NUM_OF_FUNCS] = {
+    "DEBUG",
+    "INFO",
+    "WARNING",
+    "ERROR",
+};
+
+void Harl::debug(void) { std::cout << "debug message" << std::endl; }
+
+void Harl::info(void) { std::cout << "info message" << std::endl; }
+
+void Harl::warning(void) { std::cout << "warning message" << std::endl; }
+
+void Harl::error(void) { std::cout << "error message" << std::endl; }
+
+void Harl::complain(std::string level) {
+  void (Harl::*func[NUM_OF_FUNCS])() = {&Harl::debug, &Harl::info,
+                                        &Harl::warning, &Harl::error};
+
+  for (int i = 0; i < NUM_OF_FUNCS; i++) {
+    if (levels[i] == level) {
+      (this->*func[i])();
+      return;
+    }
+  }
+  std::cout << "Invalid level: " << level << std::endl;
+}
+
+void Harl::complain_loop(int level_no) {
+  void (Harl::*func[NUM_OF_FUNCS])() = {&Harl::debug, &Harl::info,
+                                        &Harl::warning, &Harl::error};
+  for (int i = level_no; i < NUM_OF_FUNCS; i++) {
+    std::cout << "[ " << levels[i] << " ]" << std::endl;
+    (this->*func[i])();
+    std::cout << std::endl;
+  }
+}
+
+void Harl::filter(std::string level) {
+
+  for (int i = 0; i < NUM_OF_FUNCS; i++) {
+    if (levels[i] == level) {
+      complain_loop(i);
+      return;
+    }
+  }
+  std::cout << "[ Probably complaining about insignificant problems ]"
+            << std::endl;
+}
