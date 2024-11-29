@@ -6,7 +6,7 @@
 /*   By: sakitaha <sakitaha@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 16:16:18 by sakitaha          #+#    #+#             */
-/*   Updated: 2024/11/28 17:31:05 by sakitaha         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:16:24 by sakitaha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ static void replaceStr(std::ifstream &inFile, std::ofstream &outFile,
   while (std::getline(inFile, line)) {
     size_t pos = 0;
     while ((pos = line.find(s1, pos)) != std::string::npos) {
-      if (pos > line.size()) {
-        throw std::out_of_range("Invalid position for erase/insert");
-      }
       line.erase(pos, s1.length());
       line.insert(pos, s2);
       pos += s2.length();
@@ -47,6 +44,10 @@ static bool validate_argv(int argc, const char *argv[]) {
     std::cerr << "Error: Search string cannot be empty." << std::endl;
     return false;
   }
+  if (std::string(argv[3]).empty()) {
+    std::cerr << "Error: Replace string cannot be empty." << std::endl;
+    return false;
+  }
   return true;
 }
 
@@ -64,13 +65,10 @@ int main(int argc, const char *argv[]) {
     if (!inFile.is_open()) {
       throw std::runtime_error("Error: Failed to open input file");
     }
-
     if (!outFile.is_open()) {
       throw std::runtime_error("Error: Failed to create output file");
     }
-
     replaceStr(inFile, outFile, argv[2], argv[3]);
-
   } catch (const std::exception &e) {
     std::cerr << e.what() << std::endl;
     if (inFile.is_open())
