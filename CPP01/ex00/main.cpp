@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include <cstdlib>
 #include <iostream>
 
 static void printError(const char *errorMsg) {
@@ -31,7 +32,7 @@ static std::string getInputStr(const std::string &prompt) {
       if (std::cin.eof())
         printErrorExit("EOF");
       std::cin.clear();
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      std::cin.ignore(std::streamsize(-1), '\n');
       std::cout << "Error: Failed to receive input" << std::endl;
       continue;
     }

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
+#include <cstdlib>
 #include <iostream>
 
 static void fatalError(const char *errorMsg) {
