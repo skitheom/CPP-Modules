@@ -18,9 +18,9 @@ int main(int argc, const char **argv) {
   (void)argv;
   if (argc != 1) {
     std::cerr << "Error: too many arguments" << std::endl;
-    exit(EXIT_FAILURE);
+    return 1;
   }
   PhoneBook phoneBook;
   phoneBook.startPhoneBook();
-  return EXIT_SUCCESS;
+  return 0;
 }

@@ -11,8 +11,11 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <limits>
+#include <sstream>
 
 PhoneBook::PhoneBook() : nextIndex(0) {}
 
@@ -95,7 +98,9 @@ void PhoneBook::displayContactList() {
       continue;
     }
     std::cout << "|";
-    displayElement(std::to_string(i + 1));
+    std::stringstream ss;
+    ss << (i + 1);
+    displayElement(ss.str());
     displayElement(contacts[i].getFirstName());
     displayElement(contacts[i].getLastName());
     displayElement(contacts[i].getNickname());
