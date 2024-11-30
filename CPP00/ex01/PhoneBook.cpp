@@ -47,7 +47,7 @@ int PhoneBook::getInputNum() {
   int num;
 
   while (true) {
-    std::cout << "Specify an index (0-7): ";
+    std::cout << "Specify an index: ";
     std::cin >> num;
     if (std::cin.eof())
       printErrorExit("EOF");
@@ -58,8 +58,7 @@ int PhoneBook::getInputNum() {
       continue;
     }
     if (num < 0 || num >= MAX_CONTACTS) {
-      std::cout << "Error: Index must be between 0 and " << MAX_CONTACTS - 1
-                << std::endl;
+      std::cout << "Error: Invalid index" << std::endl;
       continue;
     }
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -99,7 +98,7 @@ void PhoneBook::displayContactList() {
     }
     std::cout << "|";
     std::stringstream ss;
-    ss << (i + 1);
+    ss << i;
     displayElement(ss.str());
     displayElement(contacts[i].getFirstName());
     displayElement(contacts[i].getLastName());
